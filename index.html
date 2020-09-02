@@ -43,11 +43,26 @@
         var image = document.getElementById("imagePreview")
         const prediction = await model.predict(image, false);
         prediction.sort((a,b) => parseFloat(b.probability) - parseFloat(a.probability));
-        console.log(prediction);
+        console.log(prediction[0].classname);
+        var resultmessage;
+            switch (prediction[0].classname) {
+                case "최고":
+                    resultmessage = "오늘 하루도 활기차게 자신있게!";
+                    break;
+                case "중간":
+                    resultmessage = "평범하지만 소중하고 특별한 하루!";
+                    break;
+                case "최악":
+                    resultmessage = "사소한 것에도 감사하며 지내요!";
+                    break;
+                default:
+                    resultmessage = "오늘의 운은 내가 만들어가는거에요 ^^";
+            }
+        $('.result-message').html(resultmessage);
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
-                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-            labelContainer.childNodes[i].innerHTML = classPrediction;
+                prediction[0].className + ": " + prediction[0].probability.toFixed(1)*100 + "%";
+            labelContainer.childNodes[0].innerHTML = classPrediction;
         }
     }
 </script>
@@ -60,7 +75,8 @@
                 <img id="imagePreview" src="imageup.jpeg">
             </div>
             <h1><small>얼굴 미리보기</small></h1>
-            <div id="label-container"></div>
+            <p><p><div id="label-container"></div></p></p>
+            <p class="result-message"></p>
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
