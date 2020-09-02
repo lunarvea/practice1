@@ -46,13 +46,13 @@
         console.log(prediction[0].classname);
         var resultmessage;
             switch (prediction[0].classname) {
-                case "최고":
+                case "Lucky Day":
                     resultmessage = "오늘 하루도 활기차게 자신있게!";
                     break;
-                case "중간":
+                case "Let's Smile":
                     resultmessage = "평범하지만 소중하고 특별한 하루!";
                     break;
-                case "최악":
+                case "Be careful":
                     resultmessage = "사소한 것에도 감사하며 지내요!";
                     break;
                 default:
@@ -91,7 +91,6 @@
         }
         reader.readAsDataURL(input.files[0]);
         init().then(function(){
-            console.log("hello");
             predict();
         });
         
